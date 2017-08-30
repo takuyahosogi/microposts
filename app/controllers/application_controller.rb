@@ -15,5 +15,4 @@ class ApplicationController < ActionController::Base
     @count_microposts = user.microposts.count
     
   end
-  
 end
