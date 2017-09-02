@@ -31,20 +31,20 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
-  has_many :relationships
-  has_many :favorite, through: :relationships, source: :favorite
-  has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'favorite_id'
-  has_many :favorites, through: :reverses_of_relationship, source: :micropost
+  has_many :favorites
+  has_many :users, through: :favorites, source: :user
+  has_many :reverses_of_favorite, class_name: 'favorite', foreign_key: 'user_id'
+  has_many :favorites, through: :reverses_of_favorite, source: :micropost
   
   def favorite(other_user)
     unless self == other_user
-      self.relationships.find_or_create_by(favorite_id: other_micropost.id)
+      self.favorites.find_or_create_by(user_id: other_micropost.id)
     end
   end
 
   def unfavorite(other_user)
-    relationship = self.relationships.find_by(favorite_id: other_micropost.id)
-    relationship.destroy if relationship
+    favorite = self.fevorites.find_by(user_id: other_micropost.id)
+    favorite.destroy if fevorites
   end
 
   def favorite?(other_micropost)
