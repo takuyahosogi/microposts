@@ -15,17 +15,4 @@ class RelationshipsController < ApplicationController
     redirect_to user
   end
   
-  def create
-    micropost = Micropost.find(params[:favorite()_id])
-    current_micropost.favorite(micropost)
-    flash[:success] = 'マイクロポストをいいねしました。'
-    redirect_to micropost
-  end
-
-  def destroy
-    micropost = Micropost.find(params[:favorite_id])
-    current_micropost.unfavorite(micropost)
-    flash[:success] = 'マイクロポストのいいねを解除しました。'
-    redirect_to micropost
-  end
 end
