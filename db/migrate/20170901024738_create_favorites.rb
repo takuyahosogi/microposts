@@ -6,10 +6,7 @@ class CreateFavorites < ActiveRecord::Migration[5.0]
 
       t.timestamps
       
-      t.references :micorpost, foreign_key: true
-      t.references :favorite, foreign_key: { to_table: :microposts }
-      
-      t.index [:micorpost_id, :favorite_id], unique: true
+      t.index [:user_id, :micropost_id], unique: true
     end
   end
 end
