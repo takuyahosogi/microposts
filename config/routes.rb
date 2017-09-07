@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
-      get :favorite
       get :favorites
     end
   end
